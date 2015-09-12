@@ -19,3 +19,14 @@
   [{:keys [x y]} board]
   (get-in board [y x]))
 
+(defn get-neighbors
+  [tile  board]
+  (let [{:keys [x y]} tile
+        neighbor-positions (for [i (range (- x 1) (+ x 2))
+                                 j (range (- y 1) (+ y 2))]
+                             {:x i :y j})]
+    (when (and tile (get-tile tile board))
+      (sequence (comp (keep #(get-tile % board))
+                      (filter #(not= % tile)))
+                neighbor-positions))))
+
