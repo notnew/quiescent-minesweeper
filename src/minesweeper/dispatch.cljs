@@ -1,9 +1,12 @@
 (ns minesweeper.dispatch
     (:require [minesweeper.state :refer [state]]
+              [minesweeper.board]
               ))
 
-(defonce counter (atom 0))
+(defn init-board
+  [{:keys [width height] :as state}]
+  (into state {:board (minesweeper.board/make-board width height)}))
 
-(defn- uniq-id []
-  (swap! counter inc))
-
+(defn init-board!
+  []
+  (swap! state init-board))
