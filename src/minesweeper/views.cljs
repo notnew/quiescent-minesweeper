@@ -60,7 +60,7 @@
 
 (defcomponent Board
   [{:keys [board mode]}]
-  (let [tiles (flatten (:tiles board))
+  (let [tiles (get-tiles board)
         width  (* tile-width (:width board))
         height (* tile-width (:height board))
         viewBox (str "0 0 " width " " height)]

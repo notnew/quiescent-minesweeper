@@ -22,6 +22,11 @@
    :tiles (make-tiles width height)
    })
 
+(defn get-tiles
+  "return a sequence of all the tiles"
+  [board]
+  (flatten (:tiles board)))
+
 (defn get-tile
   [board {:keys [x y]}]
   (get-in board [:tiles y x]))
