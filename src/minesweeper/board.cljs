@@ -23,7 +23,7 @@
    })
 
 (defn get-tile
-  [{:keys [x y]} board]
+  [board {:keys [x y]}]
   (get-in board [:tiles y x]))
 
 (defn set-tile
@@ -31,13 +31,13 @@
   (assoc-in board [:tiles y x key] value))
 
 (defn get-neighbors
-  [tile  board]
+  [board tile]
   (let [{:keys [x y]} tile
         neighbor-positions (for [i (range (- x 1) (+ x 2))
                                  j (range (- y 1) (+ y 2))]
                              {:x i :y j})]
-    (when (and tile (get-tile tile board))
-      (sequence (comp (keep #(get-tile % board))
+    (when (and tile (get-tile board tile))
+      (sequence (comp (keep #(get-tile board %))
                       (filter #(not= % tile)))
                 neighbor-positions))))
 
