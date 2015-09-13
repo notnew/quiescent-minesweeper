@@ -14,9 +14,9 @@
 
 (defcomponent Exploded
   []
-  (dom/g {} (TileLabel "@@" "red")
-            (TileLabel "##" "black")
-            (TileLabel "$%" "yellow")
+  (dom/g {} (TileLabel "@" "red")
+            (TileLabel "#" "black")
+            (TileLabel "$" "yellow")
             (TileLabel "X" "darkred")))
 
 (defcomponent Tile
@@ -25,19 +25,21 @@
 
   [tile]
   (let [x (* tile-width (:x tile))
-        y (* tile-width (:y tile))]
+        y (* tile-width (:y tile))
+        cleared? (:cleared? tile)
+        labeled? (or cleared? (:detonated? tile))]
     (dom/g {:transform (str "translate(" x "," y ")")}
-     (dom/rect {:width tile-width
-                :height tile-width
-                :fill (if (:cleared? tile) "lightgrey" "grey")
-                :stroke "darkgrey"
-                :strokeWidth (* 0.05 tile-width)
-                :onClick (dispatch/clear-tile! tile)})
      (when (:detonated? tile)
        (Exploded))
-     (when-let [bomb-count (:cleared? tile)]
-       (when (not= bomb-count 0)
-         (TileLabel bomb-count "black"))))))
+     (when (and cleared? (not= (:neighboring-bombs tile) 0))
+       (TileLabel (:neighboring-bombs tile) "black"))
+     (dom/rect {:width tile-width
+                :height tile-width
+                :fill "grey"
+                :opacity (if labeled? 0.3 1)
+                :stroke "darkgrey"
+                :strokeWidth (* 0.05 tile-width)
+                :onClick (when-not cleared? (dispatch/clear-tile! tile))}))))
 
 (defcomponent Overlay
   []
