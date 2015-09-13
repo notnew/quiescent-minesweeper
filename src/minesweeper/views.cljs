@@ -29,18 +29,36 @@
                (when (not= count 0)
                  count)))))
 
+(defcomponent Overlay
+  []
+  (dom/g
+   {}
+   (dom/text {:y "50%" :x "7%"
+              :fontSize (* 0.75 tile-width )}
+       "Click for a new game")
+   (dom/rect {:width "100%" :height "100%"
+              :fill "grey"
+              :opacity 0.5
+              :onClick #(dispatch/init-board!)})))
+
 (defcomponent Board
-  [{:keys [tiles width height]}]
-  (dom/svg {:width 400 :height 400
-            :viewBox (str "0 0 " (* width tile-width) " " (* height tile-width))
-            }
-   (apply dom/g {}
-           (map Tile (flatten tiles)))))
+  [{:keys [board mode]}]
+  (let [tiles (flatten (:tiles board))
+        width  (* tile-width (:width board))
+        height (* tile-width (:height board))
+        viewBox (str "0 0 " width " " height)]
+    (dom/svg {:width 400 :height 400
+              :viewBox viewBox
+              }
+      (apply dom/g {}
+             (map Tile tiles))
+      (when (not= mode :playing)
+        (Overlay)))))
 
 (defcomponent Main-panel
-  [state]
+  [{:keys [mode board]:as state}]
   (dom/div {}
      "Hello from minesweeper project"
-     (Board (:board state))
+     (Board {:board board :mode mode})
      (dom/p)
      "Your state is: " (pr-str state)))

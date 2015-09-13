@@ -6,7 +6,8 @@
 (defn init-board!
   []
   (let [new-board (minesweeper.board/make-board 9 9)]
-    (swap! state assoc :board new-board)))
+    (swap! state assoc :board new-board
+                       :mode :playing)))
 
 (defn clear-tile!
   "return an event handler that clears the provided tile when the event fires"
