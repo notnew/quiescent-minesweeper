@@ -26,6 +26,10 @@
   [{:keys [x y]} board]
   (get-in board [:tiles y x]))
 
+(defn set-tile
+  [board {:keys [x y] :as tile} key value]
+  (assoc-in board [:tiles y x key] value))
+
 (defn get-neighbors
   [tile  board]
   (let [{:keys [x y]} tile
