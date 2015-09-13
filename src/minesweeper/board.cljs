@@ -30,6 +30,10 @@
   [board {:keys [x y] :as tile} key value]
   (assoc-in board [:tiles y x key] value))
 
+(defn update-tile
+  [board {:keys [x y] :as tile} key f]
+  (update-in board [:tiles y x key] f))
+
 (defn map-tiles
   "map a function f over a given board
    f takes a tile and returns a tile"
