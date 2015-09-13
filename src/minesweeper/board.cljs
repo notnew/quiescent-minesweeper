@@ -30,6 +30,15 @@
   [board {:keys [x y] :as tile} key value]
   (assoc-in board [:tiles y x key] value))
 
+(defn map-tiles
+  "map a function f over a given board
+   f takes a tile and returns a tile"
+  [board f]
+  (let [map-row (fn [row]
+                  (vec (map f row)))
+        tiles (vec (map map-row (:tiles board)))]
+    (assoc board :tiles tiles)))
+
 (defn get-neighbors
   [board tile]
   (let [{:keys [x y]} tile
