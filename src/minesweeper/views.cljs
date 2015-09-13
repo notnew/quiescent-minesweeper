@@ -27,8 +27,10 @@
   (let [x (* tile-width (:x tile))
         y (* tile-width (:y tile))
         cleared? (:cleared? tile)
-        labeled? (or cleared? (:detonated? tile))]
+        labeled? ((some-fn :flagged? :cleared? :detonated?) tile)]
     (dom/g {:transform (str "translate(" x "," y ")")}
+     (when (:flagged? tile)
+       (TileLabel "F" "red"))
      (when (:detonated? tile)
        (Exploded))
      (when (and cleared? (not= (:neighboring-bombs tile) 0))
@@ -39,7 +41,10 @@
                 :opacity (if labeled? 0.3 1)
                 :stroke "darkgrey"
                 :strokeWidth (* 0.05 tile-width)
-                :onClick (when-not cleared? (dispatch/clear-tile! tile))}))))
+                :onClick (when (and (not cleared?) (not (:flagged? tile)))
+                           (dispatch/clear-tile! tile))
+                :onContextMenu (when-not cleared?
+                                 (dispatch/flag-tile! tile))}))))
 
 (defcomponent Overlay
   []
