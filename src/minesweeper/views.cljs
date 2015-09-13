@@ -1,6 +1,7 @@
 (ns minesweeper.views
     (:require [quiescent.core :refer-macros [defcomponent]]
               [quiescent.dom :as dom]
+              [minesweeper.state :refer [get-tiles flagged-tiles]]
               [minesweeper.dispatch :as dispatch]))
 
 (def tile-width 100)
@@ -74,8 +75,11 @@
 
 (defcomponent Main-panel
   [{:keys [mode board]:as state}]
-  (dom/div {}
-     "Hello from minesweeper project"
+  (let [flagged (flagged-tiles state)
+        total-bombs (:bomb-count state)]
+    (dom/div {}
+     flagged "/" total-bombs " mines flagged"
+     (dom/p)
      (Board {:board board :mode mode})
      (dom/p)
-     "Your state is: " (pr-str state)))
+     "Your state is: " (pr-str state))))

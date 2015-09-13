@@ -51,3 +51,17 @@
           clear (fn [board tile]
                   (set-tile board tile :cleared? true))]
       (reduce clear board (flood-safe #{} tile)))))
+
+(def get-tiles minesweeper.board/get-tiles)
+
+(defn total-tiles
+  [{:keys [board] :as state}]
+  (* (:width board) (:height board)))
+
+(defn flagged-tiles
+  [{:keys [board] :as state}]
+  (count (keep :flagged? (get-tiles board))))
+
+(defn cleared-tiles
+  [{:keys [board] :as state}]
+  (count (keep :cleared? (get-tiles board))))
