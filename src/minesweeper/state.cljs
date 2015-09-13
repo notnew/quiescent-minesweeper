@@ -4,7 +4,7 @@
                               set-tile update-tile map-tiles]]))
 
 (defonce state (atom {:mode :start
-                      :bomb-count 10
+                      :bomb-count 6
                       :board {:width 9 :height 9}}))
 
 (defn- count-neighboring
@@ -29,14 +29,13 @@
         add-bomb (fn [board position]
                    (set-tile board position :bomb? true))
         board (reduce add-bomb fresh-board bomb-positions)
-        board (mark-neighbor-counts board)
-        ]
+        board (mark-neighbor-counts board)]
     (assoc state :board board :mode :playing)))
 
-(defn clear-tile
+(defn- clear-board-tile
   [board tile]
   (if (:cleared? tile)
-    board
+    state
     (let [flood-safe  ; flood-fill to find `safe` tiles to clear
           (fn flood-safe [acc tile]
             (cond
@@ -54,6 +53,16 @@
                       (set-tile tile :flagged? false)))]
       (reduce clear board (flood-safe #{} tile)))))
 
+(declare won?)
+
+(defn clear-tile
+  [{:keys [board] :as state} tile]
+  (let [cleared-board (clear-board-tile board tile)
+        new-state (assoc state :board cleared-board)]
+    (if (won? new-state)
+      (assoc new-state :mode :won)
+      new-state)))
+
 (def get-tiles minesweeper.board/get-tiles)
 
 (defn total-tiles
@@ -67,3 +76,10 @@
 (defn cleared-tiles
   [{:keys [board] :as state}]
   (count (filter :cleared? (get-tiles board))))
+
+(defn won?
+  [state]
+  (let [cleared (cleared-tiles state)
+        total (total-tiles state)]
+    (= cleared (- total (:bomb-count state)))))
+

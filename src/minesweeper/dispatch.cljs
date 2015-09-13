@@ -17,7 +17,7 @@
   (fn [_]
     (if (:bomb? tile)
         (detonate! tile)
-        (swap! state update-in [:board] clear-tile tile))))
+        (swap! state clear-tile tile))))
 
 (defn flag-tile!
   "return an event handler that clears the provided tile when the event fires"
