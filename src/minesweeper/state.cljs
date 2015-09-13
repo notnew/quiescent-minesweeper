@@ -49,7 +49,9 @@
              :else (merge acc tile)))
 
           clear (fn [board tile]
-                  (set-tile board tile :cleared? true))]
+                  (-> board
+                      (set-tile tile :cleared? true)
+                      (set-tile tile :flagged? false)))]
       (reduce clear board (flood-safe #{} tile)))))
 
 (def get-tiles minesweeper.board/get-tiles)
@@ -60,8 +62,8 @@
 
 (defn flagged-tiles
   [{:keys [board] :as state}]
-  (count (keep :flagged? (get-tiles board))))
+  (count (filter :flagged? (get-tiles board))))
 
 (defn cleared-tiles
   [{:keys [board] :as state}]
-  (count (keep :cleared? (get-tiles board))))
+  (count (filter :cleared? (get-tiles board))))

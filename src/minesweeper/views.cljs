@@ -1,7 +1,7 @@
 (ns minesweeper.views
     (:require [quiescent.core :refer-macros [defcomponent]]
               [quiescent.dom :as dom]
-              [minesweeper.state :refer [get-tiles flagged-tiles]]
+              [minesweeper.state :refer [get-tiles won? flagged-tiles]]
               [minesweeper.dispatch :as dispatch]))
 
 (def tile-width 100)
