@@ -3,6 +3,8 @@
               [minesweeper.board]
               ))
 
+(declare mark-neighbor-counts)
+
 (defn init-board!
   []
   (let [fresh-board (minesweeper.board/make-board 9 9)
@@ -11,7 +13,8 @@
                         {:x 5, :y 7} {:x 0, :y 0}]
         add-bomb (fn [board position]
                    (minesweeper.board/set-tile board position :bomb? true))
-        board (reduce add-bomb fresh-board bomb-positions)]
+        board (reduce add-bomb fresh-board bomb-positions)
+        board (mark-neighbor-counts board)]
     (swap! state assoc :board board
                        :mode :playing)))
 
@@ -26,12 +29,20 @@
   (let [neighbors (minesweeper.board/get-neighbors board tile)]
     (count (keep :bomb? neighbors))))
 
+(defn mark-neighbor-counts
+  [board]
+  (let [mark-neighbor-count (fn [tile]
+                              (assoc tile :neighboring-bombs
+                                          (count-neighboring board tile)))
+        map-tiles minesweeper.board/map-tiles]
+    (map-tiles board mark-neighbor-count)))
+
 (defn clear-tile
   [board tile]
   (if (:cleared? tile)
     board
-    (minesweeper.board/set-tile board tile :cleared?
-                                (count-neighboring board tile))))
+    (minesweeper.board/set-tile board tile :cleared? true)))
+
 (defn clear-tile!
   "return an event handler that clears the provided tile when the event fires"
   [{:keys [x y] :as tile}]
