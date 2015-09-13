@@ -13,11 +13,10 @@
              :width 9 :height 9
              :fill "grey"}))
 
-
 (defcomponent Board
   [board]
   (apply dom/svg {}
-         (map Tile (flatten board))))
+         (map Tile (flatten (:tiles board)))))
 
 (defcomponent Main-panel
   [state]

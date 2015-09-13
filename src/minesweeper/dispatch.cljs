@@ -3,10 +3,7 @@
               [minesweeper.board]
               ))
 
-(defn init-board
-  [{:keys [width height] :as state}]
-  (into state {:board (minesweeper.board/make-board width height)}))
-
 (defn init-board!
   []
-  (swap! state init-board))
+  (let [new-board (minesweeper.board/make-board 9 9)]
+    (swap! state assoc :board new-board)))

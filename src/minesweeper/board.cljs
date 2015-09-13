@@ -10,14 +10,21 @@
   (vec (for [i (range width)]
          (make-tile i j))))
 
-(defn make-board
+(defn make-tiles
   [width height]
   (vec (for [j (range height)]
          (make-row width j))))
 
+(defn make-board
+  [width height]
+  {:width width
+   :height height
+   :tiles (make-tiles width height)
+   })
+
 (defn get-tile
   [{:keys [x y]} board]
-  (get-in board [y x]))
+  (get-in board [:tiles y x]))
 
 (defn get-neighbors
   [tile  board]
