@@ -1,7 +1,7 @@
 (ns minesweeper.dispatch
     (:require [minesweeper.state :refer [state]]
               [minesweeper.board
-               :refer [make-board set-tile get-neighbors map-tiles]]
+               :refer [make-board set-tile get-neighbors map-tiles update-tile]]
               ))
 
 (declare mark-neighbor-counts)
@@ -63,4 +63,11 @@
     (if (:bomb? tile)
         (detonate! tile)
         (swap! state update-in [:board] clear-tile tile))))
+
+(defn flag-tile!
+  "return an event handler that clears the provided tile when the event fires"
+  [{:keys [x y] :as tile}]
+  (fn [event]
+    (.preventDefault event)
+    (swap! state update-in [:board] update-tile tile :flagged? not)))
 
