@@ -10,7 +10,8 @@
   "choose a random int between min (inclusive) and max (exclusive)"
   ([max] (random-int 0 max))
   ([min max]
-     {:pre [(<= min max)]}
+     {:pre [(<= min max)]
+      :post [(<= min %) (< % max)]}
      (let [range (- max min)]
        (-> (random)
            (* range)
@@ -22,11 +23,15 @@
 (defn random-combination
   "pick a random combination of k elements from n total elements
    `n' and `k' are ints
-   returns a vector of ints representing the elements chosen
+  returns a vector of ints representing the elements chosen
    each of the n!/(k!(n-k)!) possible combinations should have an equal chance
    of being returned
+  runs in O(k^2)
   "
   [n k]
+  {:post [(= (count %) k)
+          (= % (sort %))
+          (= % (dedupe %))]}
   (let [choices (for [i (range k)]
                   (random-int (- n i)))]
     (reduce add-choice [] choices)))
@@ -53,4 +58,15 @@
      :else (recur (conj acc (first choices))
                   (+ new 1)
                   (rest choices)))))
+
+(defn- run-combos
+  [count n k]
+  (let [add-combo (fn [combo-counts new-combo]
+                    (if-let [new-combos-count (get combo-counts new-combo)]
+                      (assoc combo-counts new-combo (inc new-combos-count))
+                      (assoc combo-counts new-combo 1)))
+        run (fn [combo-counts _]
+              (add-combo combo-counts
+                         (random-combination n k)))]
+    (reduce run {} (range count))))
 
