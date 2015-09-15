@@ -4,7 +4,7 @@
                               set-tile update-tile map-tiles]]))
 
 (defonce state (atom {:mode :start
-                      :bomb-count 6
+                      :bomb-count 10
                       :board {:width 9 :height 9}}))
 
 (defn- count-neighboring
@@ -19,16 +19,29 @@
                                      (count-neighboring board tile)))]
     (map-tiles board mark-neighbor-count)))
 
+(declare total-tiles)
+
+(defn- place-bombs
+  [{:keys [width height] :as board} bomb-count]
+  (let [floor (fn [n] (.floor js/Math n))
+        tile-count (* width height)
+        random-int (fn []
+                     (floor (* tile-count (.random js/Math))))
+        int->position (fn [n]
+                        (let [x (mod n width)
+                              y (floor (/ n width))]
+                          {:x x :y y}))
+        bomb-positions (map (comp int->position random-int)
+                            (range bomb-count))
+        add-bomb (fn [board position]
+                   (set-tile board position :bomb? true))]
+    (reduce add-bomb board bomb-positions)))
+
 (defn new-game
   [state]
   (let [{:keys [width height]} (:board state)
         fresh-board (make-board width height)
-        bomb-positions [{:x 3, :y 3} {:x 7, :y 3}
-                        {:x 1, :y 1} {:x 6, :y 4}
-                        {:x 5, :y 7} {:x 0, :y 0}]
-        add-bomb (fn [board position]
-                   (set-tile board position :bomb? true))
-        board (reduce add-bomb fresh-board bomb-positions)
+        board (place-bombs fresh-board (:bomb-count state))
         board (mark-neighbor-counts board)]
     (assoc state :board board :mode :playing)))
 
@@ -66,7 +79,7 @@
 (def get-tiles minesweeper.board/get-tiles)
 
 (defn total-tiles
-  [{:keys [board] :as state}]
+  [board]
   (* (:width board) (:height board)))
 
 (defn flagged-tiles
@@ -80,6 +93,6 @@
 (defn won?
   [state]
   (let [cleared (cleared-tiles state)
-        total (total-tiles state)]
+        total (total-tiles (:board state))]
     (= cleared (- total (:bomb-count state)))))
 
