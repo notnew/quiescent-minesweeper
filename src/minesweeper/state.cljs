@@ -1,7 +1,8 @@
 (ns minesweeper.state
   (:require
    [minesweeper.board :refer [make-board get-neighbors
-                              set-tile update-tile map-tiles]]))
+                              set-tile update-tile map-tiles]]
+   [minesweeper.random :refer [random-combination floor]]))
 
 (defonce state (atom {:mode :start
                       :bomb-count 10
@@ -19,23 +20,20 @@
                                      (count-neighboring board tile)))]
     (map-tiles board mark-neighbor-count)))
 
-(declare total-tiles)
-
 (defn- place-bombs
   [{:keys [width height] :as board} bomb-count]
-  (let [floor (fn [n] (.floor js/Math n))
+  (let [int->coordinate (fn [n]
+                          (let [x (mod n width)
+                                y (floor (/ n width))]
+                            {:x x :y y}))
+
         tile-count (* width height)
-        random-int (fn []
-                     (floor (* tile-count (.random js/Math))))
-        int->position (fn [n]
-                        (let [x (mod n width)
-                              y (floor (/ n width))]
-                          {:x x :y y}))
-        bomb-positions (map (comp int->position random-int)
-                            (range bomb-count))
+        positions (random-combination tile-count bomb-count)
+        bomb-coordinates (map int->coordinate positions)
+
         add-bomb (fn [board position]
                    (set-tile board position :bomb? true))]
-    (reduce add-bomb board bomb-positions)))
+    (reduce add-bomb board bomb-coordinates)))
 
 (defn new-game
   [state]
