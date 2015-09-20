@@ -2,6 +2,7 @@
   (:require [quiescent.core :as quiescent]
             [minesweeper.state :as state]
             [minesweeper.views :as views]
+            [minesweeper.util :refer [requestAnimationFrame]]
             ))
 
 (def app-mount-point (.getElementById js/document "app"))
@@ -17,14 +18,6 @@
              (when (and (not @dirty?)
                         (not= old new))
                (reset! dirty? true))))
-
-(def requestAnimationFrame
-  (or (.. js/window -requestAnimationFrame)
-      (.. js/window -webkitRequestAnimationFrame)
-      (.. js/window -mozRequestAnimationFrame)
-      (.. js/window -msRequestAnimationFrame)
-      (fn [raf-callback]
-        (js/setTimeout raf-callback 16))))
 
 (add-watch dirty? :render-when-dirty
            (fn [_ _ old new]
