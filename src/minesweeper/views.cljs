@@ -52,16 +52,39 @@
                                  (dispatch/flag-tile! tile))}))))
 
 (defcomponent Overlay
-  []
-  (dom/g
-   {}
-   (dom/text {:y "50%" :x "7%"
-              :fontSize (* 0.75 tile-width )}
-       "Click for a new game")
-   (dom/rect {:width "100%" :height "100%"
-              :fill "grey"
-              :opacity 0.5
-              :onClick #(dispatch/init-board!)})))
+  [mode]
+  (let [winner? (= mode :won)
+        msg (if winner? "!!! You Win :) !!!" "You Lost :(")]
+    (dom/g
+     {}
+     (dom/rect {:width "100%" :height "100%"
+                :opacity 0})
+     (dom/svg {:width "50%" :height "15%"
+               :x "25%" :y "25%"}
+              (dom/rect {:width "100%" :height "100%"
+                         :fill "#cbb"
+                         :opacity 0.8})
+              (dom/text {:y "70%" :x "50%"
+                         :textAnchor "middle"
+                         :alignmentBaseline "middle"
+                         ;; :fontSize (* 0.8 tile-width )
+                         :fontSize "500%"
+                         :fill (if winner? "green" "black")}
+                        msg))
+     (dom/svg {:width "40%" :height "15%"
+               :x "30%" :y "40%"}
+              (dom/rect {:width "100%" :height "100%"
+                         :fill "lightgrey"
+                         :opacity 0.8})
+              (dom/text {:y "70%" :x "50%"
+                         :textAnchor "middle"
+                         :alignmentBaseline "middle"
+                         :fontSize (* 0.75 tile-width )
+                         :fill "black"}
+                        "Replay")
+              (dom/rect {:width "100%" :height "100%"
+                         :opacity 0
+                         :onClick #(dispatch/init-board!)})))))
 
 (defcomponent Board
   [{:keys [board mode]}]
@@ -75,7 +98,7 @@
       (apply dom/g {}
              (map #(Tile [% mode]) tiles))
       (when (not= mode :playing)
-        (Overlay)))))
+        (Overlay mode)))))
 
 (defcomponent Main-panel
   [{:keys [mode board]:as state}]
