@@ -65,7 +65,7 @@
         width  (* tile-width (:width board))
         height (* tile-width (:height board))
         viewBox (str "0 0 " width " " height)]
-    (dom/svg {:width 400 :height 400
+    (dom/svg {:width 650 :height 800
               :viewBox viewBox
               }
       (apply dom/g {}
