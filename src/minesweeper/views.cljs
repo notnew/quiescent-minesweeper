@@ -82,4 +82,4 @@
      (dom/p)
      (Board {:board board :mode mode})
      (dom/p)
-     "Your state is: " (pr-str state))))
+     "Your state is: " (pr-str (update state :board dissoc :tiles)))))
