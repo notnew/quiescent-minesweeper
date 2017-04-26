@@ -21,17 +21,21 @@
             (TileLabel "X" "darkred")))
 
 (defcomponent Tile
-  :keyfn (fn [{:keys [x y]}]
+  :keyfn (fn [[{:keys [x y]} _]]
            [x y])
 
-  [tile]
+  [[tile mode]]
   (let [x (* tile-width (:x tile))
         y (* tile-width (:y tile))
         cleared? (:cleared? tile)
         labeled? ((some-fn :flagged? :cleared? :detonated?) tile)]
     (dom/g {:transform (str "translate(" x "," y ")")}
      (when (:flagged? tile)
-       (TileLabel "F" "red"))
+       (if (and (= mode :dead) (not (:bomb? tile)))
+         (dom/g {}
+                (TileLabel "F" "red")
+                (TileLabel "x" "green"))
+         (TileLabel "F" "red")))
      (when (:detonated? tile)
        (Exploded))
      (when (and cleared? (not= (:neighboring-bombs tile) 0))
@@ -69,7 +73,7 @@
               :viewBox viewBox
               }
       (apply dom/g {}
-             (map Tile tiles))
+             (map #(Tile [% mode]) tiles))
       (when (not= mode :playing)
         (Overlay)))))
 
