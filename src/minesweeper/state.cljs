@@ -41,7 +41,7 @@
         fresh-board (make-board width height)
         board (place-bombs fresh-board (:bomb-count state))
         board (mark-neighbor-counts board)]
-    (assoc state :board board :mode :playing)))
+    (assoc state :board board :mode :playing :flag-count 0)))
 
 (defn- clear-board-tile
   [board tile]
@@ -82,7 +82,7 @@
 
 (defn flagged-tiles
   [{:keys [board] :as state}]
-  (count (filter :flagged? (get-tiles board))))
+  (:flag-count state))
 
 (defn cleared-tiles
   [{:keys [board] :as state}]
