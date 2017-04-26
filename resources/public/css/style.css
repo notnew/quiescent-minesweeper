@@ -1,3 +1,17 @@
 body {
   background-color: #fed;
 }
+
+text::selection {
+  background: transparent;
+}
+q
+text::-moz-selection {
+  background: transparent;
+}
+
+text {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
