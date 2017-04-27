@@ -1,10 +1,10 @@
 (defproject minesweeper "0.1.0-SNAPSHOT"
 
-  :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.122"]
-                 [quiescent "0.2.0-alpha1"]]
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [org.clojure/clojurescript "1.9.521"]
+                 [quiescent "0.3.2"]]
 
-  :plugins [[lein-figwheel "0.4.0-SNAPSHOT"]]
+  :plugins [[lein-figwheel "0.5.10"]]
 
   :clean-targets ^{:protect false} [:target-path "out" "resources/public/cljs"]
 
