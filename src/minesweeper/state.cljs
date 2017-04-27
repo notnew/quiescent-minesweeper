@@ -1,7 +1,7 @@
 (ns minesweeper.state
   (:require
    [minesweeper.board :refer [make-board get-neighbors
-                              set-tile update-tile map-tiles]]
+                              set-tile update-tile map-tiles count-tiles]]
    [minesweeper.random :refer [random-combination floor]]))
 
 (defonce state (atom {:mode :start
@@ -41,7 +41,7 @@
         fresh-board (make-board width height)
         board (place-bombs fresh-board (:bomb-count state))
         board (mark-neighbor-counts board)]
-    (assoc state :board board :mode :playing :flag-count 0)))
+    (assoc state :board board :mode :playing)))
 
 (defn- clear-board-tile
   [board tile]
@@ -74,19 +74,17 @@
       (assoc new-state :mode :won)
       new-state)))
 
-(def get-tiles minesweeper.board/get-tiles)
-
 (defn total-tiles
   [board]
   (* (:width board) (:height board)))
 
 (defn flagged-tiles
   [{:keys [board] :as state}]
-  (:flag-count state))
+  (count-tiles board :flagged?))
 
 (defn cleared-tiles
   [{:keys [board] :as state}]
-  (count (filter :cleared? (get-tiles board))))
+  (count-tiles board :cleared?))
 
 (defn won?
   [state]

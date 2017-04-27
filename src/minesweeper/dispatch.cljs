@@ -1,6 +1,6 @@
 (ns minesweeper.dispatch
     (:require [minesweeper.state :refer [state new-game clear-tile]]
-              [minesweeper.board :refer [set-tile get-tile update-tile]]))
+              [minesweeper.board :refer [set-tile update-tile]]))
 
 (defn init-board! []
   (swap! state new-game))
@@ -24,8 +24,5 @@
   [{:keys [x y] :as tile}]
   (fn [event]
     (.preventDefault event)
-    (let [new-state (swap! state update-in [:board] update-tile tile :flagged? not)
-          added-flag? (:flagged? (get-tile (:board new-state) tile))
-          update-count (if added-flag? inc dec)]
-      (swap! state update :flag-count update-count))))
+    (swap! state update-in [:board] update-tile tile :flagged? not)))
 

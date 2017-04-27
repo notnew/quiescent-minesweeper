@@ -48,6 +48,14 @@
         tiles (vec (map map-row (:tiles board)))]
     (assoc board :tiles tiles)))
 
+(defn count-tiles
+  "Count the number of tiles on the board that satisfy the given predicate"
+  [board pred?]
+  (let [xf (comp cat
+                 (filter pred?)
+                 (map (constantly 1)))]
+    (transduce xf + (:tiles board))))
+
 (defn get-neighbors
   [board tile]
   (let [{:keys [x y]} tile
