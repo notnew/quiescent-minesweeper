@@ -59844,28 +59844,28 @@ goog.require("minesweeper.state");
 goog.require("minesweeper.board");
 goog.require("minesweeper.dispatch");
 minesweeper.views.tile_width = 100;
-minesweeper.views.Label = quiescent.core.component.call(null, function(p__13701) {
-  var map__13702 = p__13701;
-  var map__13702__$1 = (!(map__13702 == null) ? map__13702.cljs$lang$protocol_mask$partition0$ & 64 || cljs.core.PROTOCOL_SENTINEL === map__13702.cljs$core$ISeq$ ? true : false : false) ? cljs.core.apply.call(null, cljs.core.hash_map, map__13702) : map__13702;
-  var x = cljs.core.get.call(null, map__13702__$1, new cljs.core.Keyword(null, "x", "x", 2099068185));
-  var height = cljs.core.get.call(null, map__13702__$1, new cljs.core.Keyword(null, "height", "height", 1025178622));
-  var text = cljs.core.get.call(null, map__13702__$1, new cljs.core.Keyword(null, "text", "text", -1790561697));
-  var y = cljs.core.get.call(null, map__13702__$1, new cljs.core.Keyword(null, "y", "y", -1757859776));
-  var font_size = cljs.core.get.call(null, map__13702__$1, new cljs.core.Keyword(null, "font-size", "font-size", -1847940346));
-  var fill = cljs.core.get.call(null, map__13702__$1, new cljs.core.Keyword(null, "fill", "fill", 883462889));
-  var text_color = cljs.core.get.call(null, map__13702__$1, new cljs.core.Keyword(null, "text-color", "text-color", 1728708298));
-  var width = cljs.core.get.call(null, map__13702__$1, new cljs.core.Keyword(null, "width", "width", -384071477));
-  var opacity = cljs.core.get.call(null, map__13702__$1, new cljs.core.Keyword(null, "opacity", "opacity", 397153780));
-  var attrs = cljs.core.get.call(null, map__13702__$1, new cljs.core.Keyword(null, "attrs", "attrs", -2090668713));
+minesweeper.views.Label = quiescent.core.component.call(null, function(p__9931) {
+  var map__9932 = p__9931;
+  var map__9932__$1 = (!(map__9932 == null) ? map__9932.cljs$lang$protocol_mask$partition0$ & 64 || cljs.core.PROTOCOL_SENTINEL === map__9932.cljs$core$ISeq$ ? true : false : false) ? cljs.core.apply.call(null, cljs.core.hash_map, map__9932) : map__9932;
+  var x = cljs.core.get.call(null, map__9932__$1, new cljs.core.Keyword(null, "x", "x", 2099068185));
+  var height = cljs.core.get.call(null, map__9932__$1, new cljs.core.Keyword(null, "height", "height", 1025178622));
+  var text = cljs.core.get.call(null, map__9932__$1, new cljs.core.Keyword(null, "text", "text", -1790561697));
+  var y = cljs.core.get.call(null, map__9932__$1, new cljs.core.Keyword(null, "y", "y", -1757859776));
+  var font_size = cljs.core.get.call(null, map__9932__$1, new cljs.core.Keyword(null, "font-size", "font-size", -1847940346));
+  var fill = cljs.core.get.call(null, map__9932__$1, new cljs.core.Keyword(null, "fill", "fill", 883462889));
+  var text_color = cljs.core.get.call(null, map__9932__$1, new cljs.core.Keyword(null, "text-color", "text-color", 1728708298));
+  var width = cljs.core.get.call(null, map__9932__$1, new cljs.core.Keyword(null, "width", "width", -384071477));
+  var opacity = cljs.core.get.call(null, map__9932__$1, new cljs.core.Keyword(null, "opacity", "opacity", 397153780));
+  var attrs = cljs.core.get.call(null, map__9932__$1, new cljs.core.Keyword(null, "attrs", "attrs", -2090668713));
   return quiescent.dom.svg.call(null, new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, "width", "width", -384071477), width, new cljs.core.Keyword(null, "height", "height", 1025178622), height, new cljs.core.Keyword(null, "x", "x", 2099068185), x, new cljs.core.Keyword(null, "y", "y", -1757859776), y], null), quiescent.dom.rect.call(null, new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, "width", "width", -384071477), "100%", new cljs.core.Keyword(null, 
   "height", "height", 1025178622), "100%", new cljs.core.Keyword(null, "fill", "fill", 883462889), fill, new cljs.core.Keyword(null, "opacity", "opacity", 397153780), opacity], null)), cljs.core.truth_(text) ? quiescent.dom.text.call(null, new cljs.core.PersistentArrayMap(null, 7, [new cljs.core.Keyword(null, "x", "x", 2099068185), "50%", new cljs.core.Keyword(null, "y", "y", -1757859776), "60%", new cljs.core.Keyword(null, "textAnchor", "textAnchor", -917689429), "middle", new cljs.core.Keyword(null, 
   "alignmentBaseline", "alignmentBaseline", 391161089), "middle", new cljs.core.Keyword(null, "dominantBaseline", "dominantBaseline", 2071607258), "middle", new cljs.core.Keyword(null, "fontSize", "fontSize", 919623033), font_size, new cljs.core.Keyword(null, "fill", "fill", 883462889), text_color], null), text) : null, quiescent.dom.rect.call(null, cljs.core.merge.call(null, new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "width", "width", -384071477), "100%", new cljs.core.Keyword(null, 
   "height", "height", 1025178622), "100%", new cljs.core.Keyword(null, "opacity", "opacity", 397153780), 0], null), attrs)));
 }, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "name", "name", 1843675177), "Label"], null));
-minesweeper.views.Tile = quiescent.core.component.call(null, function(p__13704) {
-  var vec__13705 = p__13704;
-  var tile = cljs.core.nth.call(null, vec__13705, 0, null);
-  var mode = cljs.core.nth.call(null, vec__13705, 1, null);
+minesweeper.views.Tile = quiescent.core.component.call(null, function(p__9934) {
+  var vec__9935 = p__9934;
+  var tile = cljs.core.nth.call(null, vec__9935, 0, null);
+  var mode = cljs.core.nth.call(null, vec__9935, 1, null);
   var x = minesweeper.views.tile_width * (new cljs.core.Keyword(null, "x", "x", 2099068185)).cljs$core$IFn$_invoke$arity$1(tile);
   var y = minesweeper.views.tile_width * (new cljs.core.Keyword(null, "y", "y", -1757859776)).cljs$core$IFn$_invoke$arity$1(tile);
   var spec_opts = cljs.core.truth_(function() {
@@ -59888,19 +59888,26 @@ minesweeper.views.Tile = quiescent.core.component.call(null, function(p__13704) 
     } else {
       return and__7248__auto__;
     }
-  }()) ? new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "text", "text", -1790561697), "F", new cljs.core.Keyword(null, "text-color", "text-color", 1728708298), "green"], null) : cljs.core.truth_((new cljs.core.Keyword(null, "flagged?", "flagged?", 1336044596)).cljs$core$IFn$_invoke$arity$1(tile)) ? new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "text", "text", -1790561697), "F", new cljs.core.Keyword(null, "text-color", "text-color", 1728708298), "red", 
-  new cljs.core.Keyword(null, "attrs", "attrs", -2090668713), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "onContextMenu", "onContextMenu", 1302877981), minesweeper.dispatch.flag_tile_BANG_.call(null, tile)], null)], null) : cljs.core.truth_((new cljs.core.Keyword(null, "detonated?", "detonated?", 657265787)).cljs$core$IFn$_invoke$arity$1(tile)) ? new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "text", "text", -1790561697), "\\b/", new cljs.core.Keyword(null, 
-  "text-color", "text-color", 1728708298), "darkred", new cljs.core.Keyword(null, "font-size", "font-size", -1847940346), 0.6 * minesweeper.views.tile_width], null) : null;
+  }()) ? new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "text", "text", -1790561697), "F", new cljs.core.Keyword(null, "fill", "fill", 883462889), "green"], null) : cljs.core.truth_((new cljs.core.Keyword(null, "flagged?", "flagged?", 1336044596)).cljs$core$IFn$_invoke$arity$1(tile)) ? new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "text", "text", -1790561697), "F", new cljs.core.Keyword(null, "text-color", "text-color", 1728708298), "red", new cljs.core.Keyword(null, 
+  "attrs", "attrs", -2090668713), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "onContextMenu", "onContextMenu", 1302877981), minesweeper.dispatch.flag_tile_BANG_.call(null, tile)], null)], null) : cljs.core.truth_((new cljs.core.Keyword(null, "detonated?", "detonated?", 657265787)).cljs$core$IFn$_invoke$arity$1(tile)) ? new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null, "fill", "fill", 883462889), "orange", new cljs.core.Keyword(null, "text", "text", 
+  -1790561697), "\\b/", new cljs.core.Keyword(null, "text-color", "text-color", 1728708298), "red", new cljs.core.Keyword(null, "font-size", "font-size", -1847940346), 0.6 * minesweeper.views.tile_width], null) : cljs.core.truth_(function() {
+    var and__7248__auto__ = cljs.core._EQ_.call(null, mode, new cljs.core.Keyword(null, "dead", "dead", -1946604091));
+    if (and__7248__auto__) {
+      return (new cljs.core.Keyword(null, "bomb?", "bomb?", -1424520312)).cljs$core$IFn$_invoke$arity$1(tile);
+    } else {
+      return and__7248__auto__;
+    }
+  }()) ? new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "opacity", "opacity", 397153780), 0.7, new cljs.core.Keyword(null, "text", "text", -1790561697), "*", new cljs.core.Keyword(null, "font-size", "font-size", -1847940346), 0.6 * minesweeper.views.tile_width], null) : null;
   return minesweeper.views.Label.call(null, cljs.core.merge.call(null, new cljs.core.PersistentArrayMap(null, 8, [new cljs.core.Keyword(null, "x", "x", 2099068185), x, new cljs.core.Keyword(null, "y", "y", -1757859776), y, new cljs.core.Keyword(null, "width", "width", -384071477), 0.95 * minesweeper.views.tile_width, new cljs.core.Keyword(null, "height", "height", 1025178622), 0.95 * minesweeper.views.tile_width, new cljs.core.Keyword(null, "fill", "fill", 883462889), "grey", new cljs.core.Keyword(null, 
   "opacity", "opacity", 397153780), cljs.core.truth_(spec_opts) ? 0.3 : 1, new cljs.core.Keyword(null, "font-size", "font-size", -1847940346), 0.8 * minesweeper.views.tile_width, new cljs.core.Keyword(null, "attrs", "attrs", -2090668713), new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "onClick", "onClick", -1991238530), minesweeper.dispatch.clear_tile_BANG_.call(null, tile), new cljs.core.Keyword(null, "onContextMenu", "onContextMenu", 1302877981), minesweeper.dispatch.flag_tile_BANG_.call(null, 
   tile)], null)], null), spec_opts));
-}, new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "name", "name", 1843675177), "Tile", new cljs.core.Keyword(null, "keyfn", "keyfn", 780060332), function(p__13708) {
-  var vec__13709 = p__13708;
-  var map__13712 = cljs.core.nth.call(null, vec__13709, 0, null);
-  var map__13712__$1 = (!(map__13712 == null) ? map__13712.cljs$lang$protocol_mask$partition0$ & 64 || cljs.core.PROTOCOL_SENTINEL === map__13712.cljs$core$ISeq$ ? true : false : false) ? cljs.core.apply.call(null, cljs.core.hash_map, map__13712) : map__13712;
-  var x = cljs.core.get.call(null, map__13712__$1, new cljs.core.Keyword(null, "x", "x", 2099068185));
-  var y = cljs.core.get.call(null, map__13712__$1, new cljs.core.Keyword(null, "y", "y", -1757859776));
-  var _ = cljs.core.nth.call(null, vec__13709, 1, null);
+}, new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "name", "name", 1843675177), "Tile", new cljs.core.Keyword(null, "keyfn", "keyfn", 780060332), function(p__9938) {
+  var vec__9939 = p__9938;
+  var map__9942 = cljs.core.nth.call(null, vec__9939, 0, null);
+  var map__9942__$1 = (!(map__9942 == null) ? map__9942.cljs$lang$protocol_mask$partition0$ & 64 || cljs.core.PROTOCOL_SENTINEL === map__9942.cljs$core$ISeq$ ? true : false : false) ? cljs.core.apply.call(null, cljs.core.hash_map, map__9942) : map__9942;
+  var x = cljs.core.get.call(null, map__9942__$1, new cljs.core.Keyword(null, "x", "x", 2099068185));
+  var y = cljs.core.get.call(null, map__9942__$1, new cljs.core.Keyword(null, "y", "y", -1757859776));
+  var _ = cljs.core.nth.call(null, vec__9939, 1, null);
   return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [x, y], null);
 }], null));
 minesweeper.views.Overlay = quiescent.core.component.call(null, function(mode) {
@@ -59925,31 +59932,30 @@ minesweeper.views.Overlay = quiescent.core.component.call(null, function(mode) {
     }(initial_QMARK_, winner_QMARK_, msg)], null), "30%", "15%", "Replay"])));
   }
 }, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "name", "name", 1843675177), "Overlay"], null));
-minesweeper.views.Board = quiescent.core.component.call(null, function(p__13715) {
-  var map__13716 = p__13715;
-  var map__13716__$1 = (!(map__13716 == null) ? map__13716.cljs$lang$protocol_mask$partition0$ & 64 || cljs.core.PROTOCOL_SENTINEL === map__13716.cljs$core$ISeq$ ? true : false : false) ? cljs.core.apply.call(null, cljs.core.hash_map, map__13716) : map__13716;
-  var board = cljs.core.get.call(null, map__13716__$1, new cljs.core.Keyword(null, "board", "board", -1907017633));
-  var mode = cljs.core.get.call(null, map__13716__$1, new cljs.core.Keyword(null, "mode", "mode", 654403691));
+minesweeper.views.Board = quiescent.core.component.call(null, function(p__9945) {
+  var map__9946 = p__9945;
+  var map__9946__$1 = (!(map__9946 == null) ? map__9946.cljs$lang$protocol_mask$partition0$ & 64 || cljs.core.PROTOCOL_SENTINEL === map__9946.cljs$core$ISeq$ ? true : false : false) ? cljs.core.apply.call(null, cljs.core.hash_map, map__9946) : map__9946;
+  var board = cljs.core.get.call(null, map__9946__$1, new cljs.core.Keyword(null, "board", "board", -1907017633));
+  var mode = cljs.core.get.call(null, map__9946__$1, new cljs.core.Keyword(null, "mode", "mode", 654403691));
   var tiles = minesweeper.board.get_tiles.call(null, board);
   var width = minesweeper.views.tile_width * (new cljs.core.Keyword(null, "width", "width", -384071477)).cljs$core$IFn$_invoke$arity$1(board);
   var height = minesweeper.views.tile_width * (new cljs.core.Keyword(null, "height", "height", 1025178622)).cljs$core$IFn$_invoke$arity$1(board);
   var viewBox = [cljs.core.str.cljs$core$IFn$_invoke$arity$1("0 0 "), cljs.core.str.cljs$core$IFn$_invoke$arity$1(width), cljs.core.str.cljs$core$IFn$_invoke$arity$1(" "), cljs.core.str.cljs$core$IFn$_invoke$arity$1(height)].join("");
-  return quiescent.dom.svg.call(null, new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "width", "width", -384071477), 650, new cljs.core.Keyword(null, "height", "height", 1025178622), 800, new cljs.core.Keyword(null, "viewBox", "viewBox", -469489477), viewBox], null), cljs.core.apply.call(null, quiescent.dom.g, cljs.core.PersistentArrayMap.EMPTY, cljs.core.map.call(null, function(tiles, width, height, viewBox, map__13716, map__13716__$1, board, mode) {
-    return function(p1__13714_SHARP_) {
-      return minesweeper.views.Tile.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [p1__13714_SHARP_, mode], null));
+  return quiescent.dom.svg.call(null, new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "width", "width", -384071477), 650, new cljs.core.Keyword(null, "height", "height", 1025178622), 800, new cljs.core.Keyword(null, "viewBox", "viewBox", -469489477), viewBox], null), cljs.core.apply.call(null, quiescent.dom.g, cljs.core.PersistentArrayMap.EMPTY, cljs.core.map.call(null, function(tiles, width, height, viewBox, map__9946, map__9946__$1, board, mode) {
+    return function(p1__9944_SHARP_) {
+      return minesweeper.views.Tile.call(null, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [p1__9944_SHARP_, mode], null));
     };
-  }(tiles, width, height, viewBox, map__13716, map__13716__$1, board, mode), tiles)), cljs.core.not_EQ_.call(null, mode, new cljs.core.Keyword(null, "playing", "playing", 70013335)) ? minesweeper.views.Overlay.call(null, mode) : null);
+  }(tiles, width, height, viewBox, map__9946, map__9946__$1, board, mode), tiles)), cljs.core.not_EQ_.call(null, mode, new cljs.core.Keyword(null, "playing", "playing", 70013335)) ? minesweeper.views.Overlay.call(null, mode) : null);
 }, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "name", "name", 1843675177), "Board"], null));
-minesweeper.views.Main_panel = quiescent.core.component.call(null, function(p__13718) {
-  var map__13719 = p__13718;
-  var map__13719__$1 = (!(map__13719 == null) ? map__13719.cljs$lang$protocol_mask$partition0$ & 64 || cljs.core.PROTOCOL_SENTINEL === map__13719.cljs$core$ISeq$ ? true : false : false) ? cljs.core.apply.call(null, cljs.core.hash_map, map__13719) : map__13719;
-  var state = map__13719__$1;
-  var mode = cljs.core.get.call(null, map__13719__$1, new cljs.core.Keyword(null, "mode", "mode", 654403691));
-  var board = cljs.core.get.call(null, map__13719__$1, new cljs.core.Keyword(null, "board", "board", -1907017633));
+minesweeper.views.Main_panel = quiescent.core.component.call(null, function(p__9948) {
+  var map__9949 = p__9948;
+  var map__9949__$1 = (!(map__9949 == null) ? map__9949.cljs$lang$protocol_mask$partition0$ & 64 || cljs.core.PROTOCOL_SENTINEL === map__9949.cljs$core$ISeq$ ? true : false : false) ? cljs.core.apply.call(null, cljs.core.hash_map, map__9949) : map__9949;
+  var state = map__9949__$1;
+  var mode = cljs.core.get.call(null, map__9949__$1, new cljs.core.Keyword(null, "mode", "mode", 654403691));
+  var board = cljs.core.get.call(null, map__9949__$1, new cljs.core.Keyword(null, "board", "board", -1907017633));
   var flagged = minesweeper.state.flagged_tiles.call(null, state);
   var total_bombs = (new cljs.core.Keyword(null, "bomb-count", "bomb-count", 535934667)).cljs$core$IFn$_invoke$arity$1(state);
-  return quiescent.dom.div.call(null, cljs.core.PersistentArrayMap.EMPTY, flagged, "/", total_bombs, " mines flagged", quiescent.dom.p.call(null), minesweeper.views.Board.call(null, new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "board", "board", -1907017633), board, new cljs.core.Keyword(null, "mode", "mode", 654403691), mode], null)), quiescent.dom.p.call(null), "Your state is: ", cljs.core.pr_str.call(null, cljs.core.update.call(null, state, new cljs.core.Keyword(null, 
-  "board", "board", -1907017633), cljs.core.dissoc, new cljs.core.Keyword(null, "tiles", "tiles", 178505240))));
+  return quiescent.dom.div.call(null, cljs.core.PersistentArrayMap.EMPTY, flagged, "/", total_bombs, " mines flagged", quiescent.dom.p.call(null), minesweeper.views.Board.call(null, new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null, "board", "board", -1907017633), board, new cljs.core.Keyword(null, "mode", "mode", 654403691), mode], null)));
 }, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "name", "name", 1843675177), "Main-panel"], null));
 goog.provide("minesweeper.core");
 goog.require("cljs.core");
