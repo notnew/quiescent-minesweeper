@@ -6,51 +6,6 @@
 
 (def tile-width 100)
 
-(defcomponent TileLabel
-  [text color]
-  (dom/text {:y (* 0.8 tile-width) :x (* 0.2 tile-width)
-             :fontSize (* 0.8 tile-width)
-             :fill color}
-            text))
-
-(defcomponent Exploded
-  []
-  (dom/g {} (TileLabel "@" "red")
-            (TileLabel "#" "black")
-            (TileLabel "$" "yellow")
-            (TileLabel "X" "darkred")))
-
-(defcomponent Tile
-  :keyfn (fn [[{:keys [x y]} _]]
-           [x y])
-
-  [[tile mode]]
-  (let [x (* tile-width (:x tile))
-        y (* tile-width (:y tile))
-        cleared? (:cleared? tile)
-        labeled? ((some-fn :flagged? :cleared? :detonated?) tile)]
-    (dom/g {:transform (str "translate(" x "," y ")")}
-     (when (:flagged? tile)
-       (if (and (= mode :dead) (not (:bomb? tile)))
-         (dom/g {}
-                (TileLabel "F" "red")
-                (TileLabel "x" "green"))
-         (TileLabel "F" "red")))
-     (when (:detonated? tile)
-       (Exploded))
-     (when (and cleared? (not= (:neighboring-bombs tile) 0))
-       (TileLabel (:neighboring-bombs tile) "black"))
-     (dom/rect {:width tile-width
-                :height tile-width
-                :fill "grey"
-                :opacity (if labeled? 0.3 1)
-                :stroke "darkgrey"
-                :strokeWidth (* 0.05 tile-width)
-                :onClick (when (and (not cleared?) (not (:flagged? tile)))
-                           (dispatch/clear-tile! tile))
-                :onContextMenu (when-not cleared?
-                                 (dispatch/flag-tile! tile))}))))
-
 (defcomponent Label
   [{:keys [text font-size text-color
            width height x y fill opacity
@@ -60,7 +15,7 @@
                          :fill fill
                          :opacity opacity})
               (when text
-                (dom/text {:y "70%" :x "50%"
+                (dom/text {:y "80%" :x "50%"
                            :textAnchor "middle"
                            :alignmentBaseline "middle"
                            :fontSize font-size
@@ -68,6 +23,40 @@
                           text))
               (dom/rect (merge {:width "100%" :height "100%" :opacity 0}
                                attrs))))
+(defcomponent Tile
+  :keyfn (fn [[{:keys [x y]} _]]
+           [x y])
+
+  [[tile mode]]
+  (let [x (* tile-width (:x tile))
+        y (* tile-width (:y tile))
+        spec-opts (cond (and (:cleared? tile)
+                             (> (:neighboring-bombs tile) 0))
+                        {:text (:neighboring-bombs tile) :attrs nil}
+
+                        (:cleared? tile)
+                        {:attrs nil}
+
+                        (and (= mode :dead) (:flagged? tile) (not (:bomb? tile)))
+                        {:text "F" :text-color "green"}
+
+                        (:flagged? tile)
+                        {:text "F" :text-color "red"
+                         :attrs {:onContextMenu (dispatch/flag-tile! tile)}}
+
+                        (:detonated? tile)
+                        {:text "\\b/"
+                         :text-color "darkred"
+                         :font-size (* 0.6 tile-width)})]
+    (Label (merge {:x x :y y
+                   :width (* 0.9 tile-width)
+                   :height (* 0.9 tile-width)
+                   :fill "grey"
+                   :opacity (if spec-opts 0.3 1)
+                   :font-size (* 0.8 tile-width)
+                   :attrs {:onClick (dispatch/clear-tile! tile)
+                           :onContextMenu (dispatch/flag-tile! tile)}}
+                  spec-opts))))
 
 (defcomponent Overlay
   [mode]
