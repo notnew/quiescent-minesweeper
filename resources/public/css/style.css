@@ -5,7 +5,7 @@ body {
 text::selection {
   background: transparent;
 }
-q
+
 text::-moz-selection {
   background: transparent;
 }
