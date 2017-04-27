@@ -26,3 +26,9 @@
     (.preventDefault event)
     (swap! state update-in [:board] update-tile tile :flagged? not)))
 
+(defn no-op
+  "return an event handler that clears the provided tile when the event fires"
+  [&args]
+  (fn [event]
+    (.preventDefault event)))
+

@@ -33,10 +33,11 @@
         y (* tile-width (:y tile))
         spec-opts (cond (and (:cleared? tile)
                              (> (:neighboring-bombs tile) 0))
-                        {:text (:neighboring-bombs tile) :attrs nil}
+                        {:text (:neighboring-bombs tile)
+                         :attrs {:onContextMenu (dispatch/no-op)}}
 
                         (:cleared? tile)
-                        {:attrs nil}
+                        {:attrs {:onContextMenu (dispatch/no-op)}}
 
                         (and (= mode :dead) (:flagged? tile) (not (:bomb? tile)))
                         {:text "F" :text-color "green"}
