@@ -28,7 +28,7 @@
 
 (defn no-op
   "return an event handler that clears the provided tile when the event fires"
-  [&args]
-  (fn [event]
+  []
+  (fn [event &_]
     (.preventDefault event)))
 
