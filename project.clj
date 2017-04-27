@@ -25,5 +25,5 @@
                          :pretty-print true}}]}
 
   :figwheel
-  { :css-dirs ["resources/public/css"] }
+  { :css-dirs ["docs/css"] }
 )
