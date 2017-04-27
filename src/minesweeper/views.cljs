@@ -51,6 +51,24 @@
                 :onContextMenu (when-not cleared?
                                  (dispatch/flag-tile! tile))}))))
 
+(defcomponent Label
+  [{:keys [text font-size text-color
+           width height x y fill opacity
+           attrs]}]
+  (dom/svg {:width width :height height :x x :y y}
+              (dom/rect {:width "100%" :height "100%"
+                         :fill fill
+                         :opacity opacity})
+              (when text
+                (dom/text {:y "70%" :x "50%"
+                           :textAnchor "middle"
+                           :alignmentBaseline "middle"
+                           :fontSize font-size
+                           :fill text-color}
+                          text))
+              (dom/rect (merge {:width "100%" :height "100%" :opacity 0}
+                               attrs))))
+
 (defcomponent Overlay
   [mode]
   (let [winner? (= mode :won)
@@ -59,32 +77,17 @@
      {}
      (dom/rect {:width "100%" :height "100%"
                 :opacity 0})
-     (dom/svg {:width "50%" :height "15%"
-               :x "25%" :y "25%"}
-              (dom/rect {:width "100%" :height "100%"
-                         :fill "#cbb"
-                         :opacity 0.8})
-              (dom/text {:y "70%" :x "50%"
-                         :textAnchor "middle"
-                         :alignmentBaseline "middle"
-                         ;; :fontSize (* 0.8 tile-width )
-                         :fontSize "500%"
-                         :fill (if winner? "green" "black")}
-                        msg))
-     (dom/svg {:width "40%" :height "15%"
-               :x "30%" :y "40%"}
-              (dom/rect {:width "100%" :height "100%"
-                         :fill "lightgrey"
-                         :opacity 0.8})
-              (dom/text {:y "70%" :x "50%"
-                         :textAnchor "middle"
-                         :alignmentBaseline "middle"
-                         :fontSize (* 0.75 tile-width )
-                         :fill "black"}
-                        "Replay")
-              (dom/rect {:width "100%" :height "100%"
-                         :opacity 0
-                         :onClick #(dispatch/init-board!)})))))
+     (Label {:x "25%" :y "25%" :width "50%" :height "15%"
+             :fill "#cbb" :opacity 0.8
+             :text msg
+             :font-size "500%"
+             :text-color (if winner? "green" "black")})
+
+     (Label {:x "30%" :y "40%" :width "40%" :height "15%"
+             :fill "lightgrey" :opacity 0.8
+             :text "Replay"
+             :font-size "400%"
+             :attrs {:onClick #(dispatch/init-board!)}}))))
 
 (defcomponent Board
   [{:keys [board mode]}]
