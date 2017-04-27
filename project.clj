@@ -4,7 +4,8 @@
                  [org.clojure/clojurescript "1.9.521"]
                  [quiescent "0.3.2"]]
 
-  :plugins [[lein-figwheel "0.5.10"]]
+  :plugins [[lein-cljsbuild "1.1.6"]
+            [lein-figwheel "0.5.10"]]
 
   :clean-targets ^{:protect false} [:target-path "out" "resources/public/cljs"]
 
