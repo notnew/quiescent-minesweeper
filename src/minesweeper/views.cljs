@@ -16,9 +16,10 @@
                          :fill fill
                          :opacity opacity})
               (when text
-                (dom/text {:y "80%" :x "50%"
+                (dom/text {:x "50%" :y "60%"
                            :textAnchor "middle"
                            :alignmentBaseline "middle"
+                           :dominantBaseline "middle"
                            :fontSize font-size
                            :fill text-color}
                           text))
