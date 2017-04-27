@@ -51,8 +51,8 @@
                          :text-color "darkred"
                          :font-size (* 0.6 tile-width)})]
     (Label (merge {:x x :y y
-                   :width (* 0.9 tile-width)
-                   :height (* 0.9 tile-width)
+                   :width (* 0.95 tile-width)
+                   :height (* 0.95 tile-width)
                    :fill "grey"
                    :opacity (if spec-opts 0.3 1)
                    :font-size (* 0.8 tile-width)
@@ -62,23 +62,29 @@
 
 (defcomponent Overlay
   [mode]
-  (let [winner? (= mode :won)
-        msg (if winner? "!!! You Win :) !!!" "You Lost :(")]
-    (dom/g
-     {}
-     (dom/rect {:width "100%" :height "100%"
-                :opacity 0})
-     (Label {:x "25%" :y "25%" :width "50%" :height "15%"
-             :fill "#cbb" :opacity 0.8
-             :text msg
-             :font-size "500%"
-             :text-color (if winner? "green" "black")})
-
-     (Label {:x "30%" :y "40%" :width "40%" :height "15%"
-             :fill "lightgrey" :opacity 0.8
-             :text "Replay"
-             :font-size "400%"
-             :attrs {:onClick #(dispatch/init-board!)}}))))
+  (let [initial? (= mode :start)
+        winner? (= mode :won)
+        msg (if winner? "!!! You Win :) !!!" "You Lose :(")]
+      (if initial?
+        (Label {:width "100%" :height "50%" :y "25%"
+                :fill "lightgrey" :opacity 0.8
+                :text "Click to Play"
+                :font-size "500%"
+                :attrs {:onClick #(dispatch/init-board!)}})
+        (dom/g
+         {}
+         (dom/rect {:width "100%" :height "100%"
+                    :opacity 0})
+         (Label {:x "25%" :y "25%" :width "50%" :height "15%"
+                 :fill "#cbb" :opacity 0.8
+                 :text msg
+                 :font-size "500%"
+                 :text-color (if winner? "green" "black")})
+         (Label {:x "30%" :y "40%" :width "40%" :height "15%"
+                 :fill "lightgrey" :opacity 0.8
+                 :text "Replay"
+                 :font-size "400%"
+                 :attrs {:onClick #(dispatch/init-board!)}})))))
 
 (defcomponent Board
   [{:keys [board mode]}]
