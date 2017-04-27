@@ -41,15 +41,21 @@
                         {:attrs {:onContextMenu (dispatch/no-op)}}
 
                         (and (= mode :dead) (:flagged? tile) (not (:bomb? tile)))
-                        {:text "F" :text-color "green"}
+                        {:text "F" :fill "green"}
 
                         (:flagged? tile)
                         {:text "F" :text-color "red"
                          :attrs {:onContextMenu (dispatch/flag-tile! tile)}}
 
                         (:detonated? tile)
-                        {:text "\\b/"
-                         :text-color "darkred"
+                        {:fill "orange"
+                         :text "\\b/"
+                         :text-color "red"
+                         :font-size (* 0.6 tile-width)}
+
+                        (and (= mode :dead) (:bomb? tile))
+                        {:opacity 0.7
+                         :text "*"
                          :font-size (* 0.6 tile-width)})]
     (Label (merge {:x x :y y
                    :width (* 0.95 tile-width)
@@ -108,6 +114,4 @@
     (dom/div {}
      flagged "/" total-bombs " mines flagged"
      (dom/p)
-     (Board {:board board :mode mode})
-     (dom/p)
-     "Your state is: " (pr-str (update state :board dissoc :tiles)))))
+     (Board {:board board :mode mode}))))
