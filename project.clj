@@ -10,16 +10,19 @@
   :clean-targets ^{:protect false} [:target-path "out" "resources/public/cljs"]
 
   :cljsbuild
-    { :builds [{:id "dev"
-                :source-paths ["src"]
-                :figwheel true
-                :compiler {:main "minesweeper.core"
-                           :asset-path "cljs/out"
-                           :output-to "resources/public/cljs/main.js"
-                           :output-dir "resources/public/cljs/out"
-                          }
-               }]
-    }
+  { :builds [{:id "dev"
+              :source-paths ["src"]
+              :figwheel true
+              :compiler {:main "minesweeper.core"
+                         :asset-path "cljs/out"
+                         :output-to "resources/public/cljs/main.js"
+                         :output-dir "resources/public/cljs/out"}}
+             {:id "release"
+              :source-paths ["src"]
+              :compiler {:main "minesweeper.core"
+                         :output-to "docs/cljs/main.js"
+                         :optimizations :whitespace
+                         :pretty-print true}}]}
 
   :figwheel
   { :css-dirs ["resources/public/css"] }
